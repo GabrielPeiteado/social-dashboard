@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "seed": "node prisma/seed.js",
+    "clear-db": "node prisma/clear_database.js",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",

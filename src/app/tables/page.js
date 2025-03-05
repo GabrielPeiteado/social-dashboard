@@ -233,17 +233,17 @@ export default function Tables() {
   };
 
   return (
-    <div className="space-y-8 p-6 bg-slate-50">
+    <div className="space-y-8 p-4 sm:p-6 bg-slate-50 min-h-screen">
       <h1 className="text-3xl font-bold">User Management</h1>
 
       {/* users form */}
-      <div className="bg-white p-6 rounded-lg shadow-xl text-gray-800">
+      <div className="bg-white p-6 rounded-lg shadow-xl text-gray-800 mx-auto w-full">
         <h2 className="text-xl font-semibold">
           {editingUserId ? "Edit User" : "Add New User"}
         </h2>
         <form
-          onSubmit={handleSubmitUser}
-          className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2"
+          onSubmit={(e) => e.preventDefault()}
+          className="grid grid-cols-1 gap-4 mt-4"
         >
           <input
             type="text"
@@ -251,7 +251,7 @@ export default function Tables() {
             value={newUser.name}
             onChange={handleUserChange}
             placeholder="User Name"
-            className="border p-2 rounded"
+            className="border p-2 rounded w-full"
             required
           />
           <input
@@ -260,12 +260,12 @@ export default function Tables() {
             value={newUser.email}
             onChange={handleUserChange}
             placeholder="Email"
-            className="border p-2 rounded"
+            className="border p-2 rounded w-full"
             required
           />
           <button
             type="submit"
-            className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-700 col-span-2"
+            className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-700 w-full"
           >
             {editingUserId ? "Update User" : "Add User"}
           </button>
@@ -273,21 +273,21 @@ export default function Tables() {
       </div>
 
       {/* platform form */}
-      <div className="bg-white p-6 rounded-lg shadow-xl text-gray-800">
+      <div className="bg-white p-6 rounded-lg shadow-xl text-gray-800 mx-auto w-full">
         <h2 className="text-xl font-semibold">
           {editingPlatformId
             ? "Edit Platform from User"
             : "Add New Platform to User"}
         </h2>
         <form
-          onSubmit={handleSubmitPlatform}
-          className="grid grid-cols-1 md:grid-cols-4 gap-4 mt-2"
+          onSubmit={(e) => e.preventDefault()}
+          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4"
         >
           <select
             name="userId"
             value={newPlatformData.userId || ""}
             onChange={handlePlatformChange}
-            className="border p-2 rounded"
+            className="border p-2 rounded w-full"
             required
           >
             <option value="">Select User</option>
@@ -301,7 +301,7 @@ export default function Tables() {
             name="platform"
             value={newPlatformData.platform}
             onChange={handlePlatformChange}
-            className="border p-2 rounded"
+            className="border p-2 rounded w-full"
             required
           >
             <option value="">Select Platform</option>
@@ -317,7 +317,7 @@ export default function Tables() {
             value={newPlatformData.followers}
             onChange={handlePlatformChange}
             placeholder="Followers"
-            className="border p-2 rounded"
+            className="border p-2 rounded w-full"
             required
           />
           <input
@@ -327,7 +327,7 @@ export default function Tables() {
             value={newPlatformData.engagement}
             onChange={handlePlatformChange}
             placeholder="Engagement (%)"
-            className="border p-2 rounded"
+            className="border p-2 rounded w-full"
             required
           />
           <input
@@ -336,12 +336,12 @@ export default function Tables() {
             value={newPlatformData.postsCount}
             onChange={handlePlatformChange}
             placeholder="Posts Count"
-            className="border p-2 rounded"
+            className="border p-2 rounded w-full"
             required
           />
           <button
             type="submit"
-            className="bg-green-500 text-white p-2 rounded-md hover:bg-green-700 col-span-4"
+            className="bg-green-500 text-white p-2 rounded-md hover:bg-green-700 w-full sm:w-auto col-span-1 sm:col-span-2 md:col-span-4"
           >
             {editingPlatformId ? "Update Platform" : "Add Platform"}
           </button>
@@ -349,7 +349,9 @@ export default function Tables() {
       </div>
 
       {/* table */}
-      <Table data={users} onEdit={handleEdit} onDelete={handleDelete} />
+      <div className="mx-auto w-full overflow-x-auto">
+        <Table data={users} />
+      </div>
     </div>
   );
 }
