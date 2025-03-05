@@ -244,7 +244,7 @@ export default function Tables() {
           {editingUserId ? "Edit User" : "Add New User"}
         </h2>
         <form
-          onSubmit={(e) => e.preventDefault()}
+          onSubmit={handleSubmitUser}
           className="grid grid-cols-1 gap-4 mt-4"
         >
           <input
@@ -282,7 +282,7 @@ export default function Tables() {
             : "Add New Platform to User"}
         </h2>
         <form
-          onSubmit={(e) => e.preventDefault()}
+          onSubmit={handleSubmitPlatform}
           className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4"
         >
           <select
@@ -352,7 +352,7 @@ export default function Tables() {
 
       {/* table */}
       <div className="mx-auto w-full overflow-x-auto">
-        <Table data={users} />
+        <Table data={users} onEdit={handleEdit} onDelete={handleDelete} />
       </div>
     </div>
   );
