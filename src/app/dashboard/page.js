@@ -32,7 +32,7 @@ export default function Dashboard() {
   const fetchUsers = async () => {
     setLoading(true);
     try {
-      const res = await axios.get(`${FRONTEND_URL}/api/user`);
+      const res = await axios.get(`/api/user`);
       setUsers(res.data);
       setFilteredUsers(res.data);
       setError(null);
