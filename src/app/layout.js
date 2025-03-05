@@ -2,6 +2,12 @@ import Navbar from "@/components/Navbar";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
 
+export const metadata = {
+  title: "Social Dashboard | Analyze & Manage Social Media Metrics",
+  description: "A powerful dashboard to track, analyze, and manage social media performance across multiple platforms in real time.",
+};
+
+
 export default function RootLayout({ children }) {
   return (
     <html lang="es">
