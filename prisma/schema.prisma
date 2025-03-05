@@ -1,0 +1,32 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(100)
+  email     String   @unique @db.VarChar(255)
+  role      String   @default("user")
+  createdAt DateTime @default(now())
+  source   String      @default("local")
+
+  socialData SocialData[]
+}
+
+
+model SocialData {
+  id          Int      @id @default(autoincrement())
+  platform    String   @db.VarChar(50)
+  followers   Int      @default(0)
+  engagement  Float    @default(0.0)
+  postsCount  Int      @default(0)
+  createdAt   DateTime @default(now())
+
+  userId      Int
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
