@@ -5,6 +5,8 @@ import { toast } from "react-hot-toast";
 import axios from "axios";
 import { socialPlatforms } from "@/utils/utils";
 
+const FRONTEND_URL = process.env.NEXT_PUBLIC_FRONTEND_URL;
+
 export default function Tables() {
   const [users, setUsers] = useState([]);
   const [editingUserId, setEditingUserId] = useState(null);
@@ -25,7 +27,7 @@ export default function Tables() {
 
   const fetchUsers = async () => {
     try {
-      const res = await axios.get("/api/user");
+      const res = await axios.get(`${FRONTEND_URL}/api/user`);
       setUsers(res.data);
     } catch (error) {
       toast.error("Failed to fetch users.");
@@ -66,7 +68,7 @@ export default function Tables() {
     e.preventDefault();
 
     try {
-      const url = editingUserId ? `/api/user/${editingUserId}` : "/api/user";
+      const url = editingUserId ? `${FRONTEND_URL}/api/user/${editingUserId}` : `${FRONTEND_URL}/api/user`;
       const method = editingUserId ? "PUT" : "POST";
 
       await axios({ method, url, data: newUser });
@@ -109,8 +111,8 @@ export default function Tables() {
 
     try {
       const url = editingPlatformId
-        ? `/api/socialData/${editingPlatformId}`
-        : "/api/socialData";
+        ? `${FRONTEND_URL}/api/socialData/${editingPlatformId}`
+        : `${FRONTEND_URL}/api/socialData`;
       const method = editingPlatformId ? "PUT" : "POST";
 
       await axios({ method, url, data: newPlatformData });
@@ -186,7 +188,7 @@ export default function Tables() {
                 className="bg-red-500 text-white px-4 py-2 rounded"
                 onClick={async () => {
                   try {
-                    await axios.delete(`/api/socialData/${platformId}`);
+                    await axios.delete(`${FRONTEND_URL}/api/socialData/${platformId}`);
                     toast.success("Platform deleted!");
                     fetchUsers();
                     toast.dismiss(t.id);
@@ -204,7 +206,7 @@ export default function Tables() {
                   className="bg-gray-700 text-white px-4 py-2 rounded"
                   onClick={async () => {
                     try {
-                      await axios.delete(`/api/user/${userId}`);
+                      await axios.delete(`${FRONTEND_URL}/api/user/${userId}`);
                       toast.success("User and platform deleted!");
                       fetchUsers();
                       toast.dismiss(t.id);

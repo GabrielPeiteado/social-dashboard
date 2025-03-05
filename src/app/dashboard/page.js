@@ -11,6 +11,9 @@ import toast from "react-hot-toast";
 import axios from "axios";
 import { socialPlatforms } from "@/utils/utils";
 
+const FRONTEND_URL = process.env.NEXT_PUBLIC_FRONTEND_URL;
+
+
 export default function Dashboard() {
   const [error, setError] = useState(null);
 
@@ -29,7 +32,7 @@ export default function Dashboard() {
   const fetchUsers = async () => {
     setLoading(true);
     try {
-      const res = await axios.get("/api/user");
+      const res = await axios.get(`${FRONTEND_URL}/api/user`);
       setUsers(res.data);
       setFilteredUsers(res.data);
       setError(null);
