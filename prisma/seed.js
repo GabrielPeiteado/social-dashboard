@@ -111,7 +111,11 @@ async function main() {
   console.log("Database seeded successfully!");
 }
 
-main()
+if (process.env.NODE_ENV === "production") {
+  console.log("Seeding skipped in production.");
+  return process.exit(0);
+} else {
+  main()
   .catch((error) => {
     console.error("Error seeding database:", error);
     process.exit(1);
@@ -119,3 +123,4 @@ main()
   .finally(async () => {
     await prisma.$disconnect();
   });
+}
